@@ -1,0 +1,10 @@
+[
+  {
+    "label": "Build theme",
+    "command": "npm run build"
+  },
+  {
+    "label": "Check theme",
+    "command": "npm run check"
+  }
+]

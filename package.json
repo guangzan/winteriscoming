@@ -1,0 +1,17 @@
+{
+  "name": "winteriscoming",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zed port of John Papa's Winter is Coming (Dark Blue) theme",
+  "repository": "https://github.com/guangzan/winteriscoming",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "npm run check"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
