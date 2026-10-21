@@ -2,8 +2,8 @@
 // The capture names follow Zed's syntax highlighting docs and the keys used
 // by current Zed theme extensions.
 
-export function syntaxStyle(p, { italics }) {
-  const italic = italics ? "italic" : null;
+export function syntaxStyle(p) {
+  const italic = "italic";
   const s = (color, { fontStyle = null, weight = null } = {}) => ({
     color,
     font_style: fontStyle,
@@ -13,8 +13,8 @@ export function syntaxStyle(p, { italics }) {
   return {
     attribute: s(p.yellow, { fontStyle: italic }),
     boolean: s(p.green),
-    character: s(p.greenSoft),
-    "character.special": s(p.greenQuote),
+    character: s(p.blue),
+    "character.special": s(p.blue),
 
     comment: s(p.comment, { fontStyle: italic }),
     "comment.doc": s(p.comment, { fontStyle: italic }),
@@ -31,7 +31,7 @@ export function syntaxStyle(p, { italics }) {
     constant: s(p.purpleConstant),
     "constant.builtin": s(p.blueConstant),
     "constant.macro": s(p.pink, { fontStyle: italic }),
-    constructor: s(p.purpleType),
+    constructor: s(p.blueConstructor, { fontStyle: italic }),
     "diff.plus": s(p.greenBright),
     "diff.minus": s(p.red),
     embedded: s(p.foreground),
@@ -51,7 +51,8 @@ export function syntaxStyle(p, { italics }) {
 
     hint: s("#4d8aa0"),
     keyword: s(p.cyan, { fontStyle: italic }),
-    "keyword.modifier": s(p.purple, { fontStyle: italic }),
+    "keyword.declaration": s(p.cyan, { fontStyle: italic }),
+    "keyword.modifier": s(p.cyan, { fontStyle: italic }),
     "keyword.type": s(p.cyan, { fontStyle: italic }),
     "keyword.coroutine": s(p.cyan, { fontStyle: italic }),
     "keyword.function": s(p.cyan, { fontStyle: italic }),
@@ -81,14 +82,14 @@ export function syntaxStyle(p, { italics }) {
     predoc: s(p.red),
     preproc: s(p.purple, { fontStyle: italic }),
     primary: s(p.foreground),
-    property: s(p.yellow, { fontStyle: italic }),
+    property: s(p.teal),
     "property.json_key": s(p.jsonKey),
 
-    punctuation: s(p.foreground),
+    punctuation: s(p.defaultToken),
     "punctuation.bracket": s(p.white),
-    "punctuation.delimiter": s(p.foreground),
-    "punctuation.special": s(p.blueTag),
-    "punctuation.special.symbol": s(p.yellow),
+    "punctuation.delimiter": s(p.defaultToken),
+    "punctuation.special": s(p.cyan, { fontStyle: italic }),
+    "punctuation.special.symbol": s(p.blue),
     "punctuation.list_marker": s(p.blueTag),
     "punctuation.markup": s(p.blueTag),
 
@@ -97,9 +98,9 @@ export function syntaxStyle(p, { italics }) {
     string: s(p.greenSoft),
     "string.doc": s(p.greenSoft),
     "string.documentation": s(p.greenSoft),
-    "string.regex": s(p.purple),
-    "string.regexp": s(p.purple),
-    "string.escape": s(p.greenQuote),
+    "string.regex": s(p.greenSoft),
+    "string.regexp": s(p.greenSoft),
+    "string.escape": s(p.blue),
     "string.special": s(p.pink),
     "string.special.path": s(p.pink),
     "string.special.symbol": s(p.yellow),
@@ -114,17 +115,19 @@ export function syntaxStyle(p, { italics }) {
     title: s(p.heading, { weight: 700 }),
 
     type: s(p.purpleType),
-    "type.builtin": s(p.purpleType),
+    "type.builtin": s(p.teal),
     "type.definition": s(p.purpleType),
+    "type.class": s(p.heading),
     "type.interface": s(p.purpleType),
-    "type.super": s(p.purpleType),
-    "type.class.definition": s(p.purpleType, { weight: 700 }),
+    "type.super": s(p.heading),
+    "type.class.definition": s(p.purpleType),
 
-    variable: s(p.blueVariable, { fontStyle: italic }),
+    variable: s(p.foreground, { fontStyle: italic }),
+    "variable.declaration": s(p.foreground, { fontStyle: italic }),
     "variable.builtin": s(p.cyan, { fontStyle: italic }),
-    "variable.member": s(p.yellow, { fontStyle: italic }),
+    "variable.member": s(p.teal),
     "variable.parameter": s("#d7dbe0"),
-    "variable.special": s(p.blueVariable, { fontStyle: italic }),
+    "variable.special": s(p.cyan, { fontStyle: italic }),
     variant: s(p.yellow),
   };
 }

@@ -4,12 +4,15 @@
 // version control colors.
 
 export function uiStyle(p) {
-  const statusBackground = [p.yellow, p.red, p.green, p.blueTag, p.purple, p.teal, p.orange];
+  // VS Code leaves editorBracketHighlight.foreground* unset, so it falls back
+  // to bracket-pair colorization's native default accents. Mirror those exact
+  // defaults in Zed when colorize_brackets is enabled.
+  const bracketAccents = ["#ffd700", "#da70d6", "#179fff"];
 
   return {
     // Window
     "background.appearance": "opaque",
-    background: p.surfaceRaised,
+    background: p.editorBackground,
     "surface.background": p.editorBackground,
     "elevated_surface.background": p.surfaceRaised,
 
@@ -43,7 +46,7 @@ export function uiStyle(p) {
     "text.placeholder": p.foregroundSubtle,
     "text.disabled": p.foregroundDisabled,
     "text.accent": p.accent,
-    icon: p.foreground,
+    icon: p.blueTagSoft,
     "icon.muted": p.foregroundMuted,
     "icon.placeholder": p.foregroundSubtle,
     "icon.disabled": p.foregroundDisabled,
@@ -51,11 +54,11 @@ export function uiStyle(p) {
     "link_text.hover": p.accentHover,
 
     // Chrome
-    "status_bar.background": p.accentDeep,
+    "status_bar.background": p.accent,
     "title_bar.background": p.titleBar,
     "title_bar.inactive_background": p.titleBarInactive,
     "toolbar.background": p.editorBackground,
-    "tab_bar.background": p.surfaceSunken,
+    "tab_bar.background": p.editorBackground,
     "tab.inactive_background": p.surfaceSunken,
     "tab.active_background": p.surfaceRaised,
     "search.match_background": "#219fd54d",
@@ -70,8 +73,8 @@ export function uiStyle(p) {
 
     // Scrollbar
     "scrollbar.thumb.background": "#084d8180",
-    "scrollbar.thumb.hover_background": "#0a6ba8aa",
-    "scrollbar.thumb.active_background": "#219fd5cc",
+    "scrollbar.thumb.hover_background": "#084d8180",
+    "scrollbar.thumb.active_background": "#084d8180",
     "scrollbar.thumb.border": null,
     "scrollbar.track.background": p.editorBackground,
     "scrollbar.track.border": "#219fd522",
@@ -87,7 +90,7 @@ export function uiStyle(p) {
     "editor.foreground": p.editorForeground,
     "editor.gutter.background": p.editorBackground,
     "editor.subheader.background": p.surfaceRaised,
-    "editor.active_line.background": "#0c499433",
+    "editor.active_line.background": "#0c499444",
     "editor.highlighted_line.background": null,
     "editor.line_number": p.accent,
     "editor.active_line_number": p.foreground,
@@ -197,8 +200,8 @@ export function uiStyle(p) {
       player(p.pinkSoft),
     ],
 
-    // Rainbow brackets / indent aware coloring
-    accents: statusBackground,
+    // Bracket pair colorization
+    accents: bracketAccents,
 
     // Vim mode
     "vim.mode.text": p.editorBackground,

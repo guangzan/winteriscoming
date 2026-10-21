@@ -15,15 +15,7 @@ export function buildFamily() {
         appearance: "dark",
         style: {
           ...uiStyle(palette),
-          syntax: syntaxStyle(palette, { italics: true }),
-        },
-      },
-      {
-        name: "Winter is Coming (Dark Blue) - No Italics",
-        appearance: "dark",
-        style: {
-          ...uiStyle(palette),
-          syntax: syntaxStyle(palette, { italics: false }),
+          syntax: syntaxStyle(palette),
         },
       },
     ],

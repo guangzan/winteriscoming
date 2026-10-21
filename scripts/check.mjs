@@ -63,8 +63,8 @@ if (family.name !== "Winter is Coming") fail("family name must be 'Winter is Com
 if (typeof family.author !== "string" || !family.author.includes("@")) {
   fail("family author must contain a name and email");
 }
-if (!Array.isArray(family.themes) || family.themes.length !== 2) {
-  fail(`expected 2 themes, found ${family.themes?.length ?? 0}`);
+if (!Array.isArray(family.themes) || family.themes.length !== 1) {
+  fail(`expected 1 theme, found ${family.themes?.length ?? 0}`);
 }
 
 const names = new Set();
@@ -98,6 +98,9 @@ for (const theme of family.themes ?? []) {
   if (!Array.isArray(style.accents) || style.accents.length === 0 || !style.accents.every(isColor)) {
     fail(`${theme.name}: accents must be a non-empty color array`);
   }
+  if (style.accents.join() !== "#ffd700,#da70d6,#179fff") {
+    fail(`${theme.name}: bracket accents must match VS Code bracket-pair defaults`);
+  }
   if (!Array.isArray(style.players) || !style.players.every((player) =>
     isColor(player.cursor) && isColor(player.selection) && isColor(player.background))) {
     fail(`${theme.name}: players must contain cursor/selection/background colors`);
@@ -117,42 +120,31 @@ for (const theme of family.themes ?? []) {
       fail(`${theme.name}: syntax '${capture}' has invalid font_weight`);
     }
   }
-}
-
-const [italics, noItalics] = family.themes ?? [];
-if (italics && noItalics) {
-  if (Object.keys(italics.style.syntax).join() !== Object.keys(noItalics.style.syntax).join()) {
-    fail("italics and no-italics variants must define the same syntax captures");
-  }
-  const uiKeys = Object.keys(italics.style).filter((key) => key !== "syntax");
-  const otherUiKeys = Object.keys(noItalics.style).filter((key) => key !== "syntax");
-  if (uiKeys.join() !== otherUiKeys.join()) {
-    fail("italics and no-italics variants must define the same UI keys");
-  }
-  if (JSON.stringify(italics.style.syntax) === JSON.stringify(noItalics.style.syntax)) {
-    fail("no-italics variant must differ from the italics variant");
-  }
-
-  const withoutFontStyle = (theme) => ({
-    appearance: theme.appearance,
-    style: {
-      ...theme.style,
-      syntax: Object.fromEntries(
-        Object.entries(theme.style.syntax).map(([capture, rule]) => [
-          capture,
-          { ...rule, font_style: null },
-        ]),
-      ),
-    },
-  });
-  if (JSON.stringify(withoutFontStyle(italics)) !== JSON.stringify(withoutFontStyle(noItalics))) {
-    fail("italics and no-italics variants may differ only by font_style");
-  }
-  if (!Object.values(italics.style.syntax).some((rule) => rule.font_style === "italic")) {
-    fail("italics variant must contain at least one italic syntax capture");
-  }
-  if (Object.values(noItalics.style.syntax).some((rule) => rule.font_style !== null)) {
-    fail("no-italics variant must not contain any font_style");
+  const expectedSyntax = {
+    constructor: { color: "#a1bde6", font_style: "italic" },
+    "keyword.declaration": { color: "#00bff9", font_style: "italic" },
+    "keyword.modifier": { color: "#00bff9", font_style: "italic" },
+    property: { color: "#7fdbca", font_style: null },
+    punctuation: { color: "#bce7ff" },
+    "punctuation.bracket": { color: "#ffffff" },
+    "punctuation.delimiter": { color: "#bce7ff" },
+    "punctuation.special": { color: "#00bff9", font_style: "italic" },
+    "string.escape": { color: "#82aaff" },
+    "string.regex": { color: "#bcf0c0" },
+    "type.builtin": { color: "#7fdbca" },
+    "type.class": { color: "#4fb4d8" },
+    "type.super": { color: "#4fb4d8" },
+    variable: { color: "#d6deeb", font_style: "italic" },
+    "variable.declaration": { color: "#d6deeb", font_style: "italic" },
+    "variable.member": { color: "#7fdbca", font_style: null },
+    "variable.special": { color: "#00bff9", font_style: "italic" },
+  };
+  for (const [capture, expectedRule] of Object.entries(expectedSyntax)) {
+    for (const [property, expectedValue] of Object.entries(expectedRule)) {
+      if (syntax[capture]?.[property] !== expectedValue) {
+        fail(`${theme.name}: syntax '${capture}' ${property} must be ${expectedValue}`);
+      }
+    }
   }
 }
 
@@ -177,5 +169,5 @@ if (errors.length > 0) {
   for (const error of errors) console.error(`  - ${error}`);
   process.exitCode = 1;
 } else {
-  console.log(`Theme check passed: ${names.size} themes, ${Object.keys(italics.style.syntax).length} syntax captures`);
+  console.log(`Theme check passed: ${names.size} theme, ${Object.keys(family.themes[0].style.syntax).length} syntax captures`);
 }

@@ -9,7 +9,7 @@ source of truth used to generate the theme family.
 - `src/palette.mjs` - Winter is Coming (Dark Blue) colors, annotated with the VS Code
   color key each value comes from.
 - `src/ui.mjs` - Zed window, panel, editor and terminal colors.
-- `src/syntax.mjs` - Tree-sitter capture colors for the italics and no-italics variants.
+- `src/syntax.mjs` - Tree-sitter capture colors.
 - `src/family.mjs` - assembles the theme family consumed by Zed.
 - `scripts/build.mjs` - writes `themes/winter-is-coming-dark-blue.json`.
 - `scripts/check.mjs` - validates the committed theme, style keys, colors and generator
@@ -33,8 +33,8 @@ There are no runtime dependencies. Node 20+ is enough.
   (MIT). Keep colors traceable to it instead of inventing new ones.
 - UI keys that have no VS Code equivalent should be derived from the palette rather
   than hard-coded one-off values.
-- The `- No Italics` variant must differ from the default variant only in
-  `font_style`. `font_weight` stays.
+- VS Code leaves `editorBracketHighlight.foreground*` unset and uses its native
+  bracket-pair defaults. Keep Zed's accents aligned with those defaults.
 - Theme and author names are user-facing: English only.
 - Verify visual changes in Zed, not only with JSON validation.
 

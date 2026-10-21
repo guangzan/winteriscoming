@@ -1,7 +1,7 @@
 id = "winter-is-coming-theme"
 name = "Winter is Coming"
 schema_version = 1
-version = "0.1.0"
+version = "0.1.1"
 authors = ["guangzan <guangzan1999@outlook.com>"]
 description = "John Papa's Winter is Coming (Dark Blue) theme, ported to Zed"
 repository = "https://github.com/guangzan/winteriscoming"

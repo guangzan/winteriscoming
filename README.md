@@ -1,10 +1,7 @@
 # Winter is Coming for Zed
 
 Community port of [John Papa's Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming)
-theme to [Zed](https://zed.dev). It includes the Dark Blue palette in two variants:
-
-- Winter is Coming (Dark Blue)
-- Winter is Coming (Dark Blue) - No Italics
+theme to [Zed](https://zed.dev), using the original Dark Blue palette.
 
 ![Winter is Coming (Dark Blue) in Zed](assets/preview.webp)
 
@@ -13,10 +10,17 @@ theme to [Zed](https://zed.dev). It includes the Dark Blue palette in two varian
 1. Open Zed.
 2. Open the command palette with `Cmd+Shift+P`.
 3. Run **zed: extensions** and search for **Winter is Coming**.
-4. Run **theme selector: toggle** and choose a Winter is Coming theme.
+4. Run **theme selector: toggle** and choose **Winter is Coming (Dark Blue)**.
+
+VS Code leaves `editorBracketHighlight.foreground*` unset in this theme, so it
+uses VS Code's native bracket-pair colorization defaults. Zed maps the same
+gold, orchid, and blue accents for bracket colorization.
 
 If the extension is not in the marketplace yet, clone this repository and use
 **zed: install dev extension** from the command palette.
+
+Zed highlights code with Tree-sitter captures rather than VS Code semantic
+tokens, so a few context-specific token differences remain unavoidable.
 
 ## Development
 
@@ -28,8 +32,8 @@ npm run build
 npm run check
 ```
 
-The check script validates both variants, the manifest, colors, syntax captures,
-and that the no-italics variant differs only in `font_style`.
+The check script validates the manifest, colors, syntax captures, bracket accents,
+and generator output.
 
 To preview changes in Zed:
 

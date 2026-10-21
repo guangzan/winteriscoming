@@ -5,7 +5,8 @@
 export const palette = {
   // Canvas and surfaces
   editorBackground: "#011627", // editor.background
-  editorForeground: "#bce7ff", // default token color
+  editorForeground: "#a7dbf7", // editor.foreground
+  defaultToken: "#bce7ff", // default token color
   foreground: "#d6deeb", // foreground
   foregroundMuted: "#7799bb", // sideBar.foreground
   foregroundSubtle: "#5f7e97", // tab.inactiveForeground
@@ -43,6 +44,7 @@ export const palette = {
   blue: "#82aaff", // terminal.ansiBrightBlue
   blueTag: "#6dbdfa", // entity.name.tag
   blueFunction: "#87aff4", // entity.name.function
+  blueConstructor: "#a1bde6", // meta.method.declaration storage.type
   blueVariable: "#a4ceee", // variable
   blueTagSoft: "#99d0f7", // activityBar.foreground
   purple: "#c792ea", // storage / terminal.ansiMagenta
