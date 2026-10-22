@@ -101,6 +101,9 @@ for (const theme of family.themes ?? []) {
   if (style.accents.join() !== "#ffd700,#da70d6,#179fff") {
     fail(`${theme.name}: bracket accents must match VS Code bracket-pair defaults`);
   }
+  if (style["text.accent"] === style["status_bar.background"]) {
+    fail(`${theme.name}: text.accent must contrast with status_bar.background`);
+  }
   if (!Array.isArray(style.players) || !style.players.every((player) =>
     isColor(player.cursor) && isColor(player.selection) && isColor(player.background))) {
     fail(`${theme.name}: players must contain cursor/selection/background colors`);

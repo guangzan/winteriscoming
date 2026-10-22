@@ -45,7 +45,10 @@ export function uiStyle(p) {
     "text.muted": p.foregroundMuted,
     "text.placeholder": p.foregroundSubtle,
     "text.disabled": p.foregroundDisabled,
-    "text.accent": p.accent,
+    // Zed renders selected status-bar icon buttons with Color::Selected,
+    // which resolves to text.accent. Keep it distinct from the status-bar
+    // background so active panel icons remain visible.
+    "text.accent": p.white,
     icon: p.blueTagSoft,
     "icon.muted": p.foregroundMuted,
     "icon.placeholder": p.foregroundSubtle,
