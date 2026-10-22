@@ -46,9 +46,10 @@ export function uiStyle(p) {
     "text.placeholder": p.foregroundSubtle,
     "text.disabled": p.foregroundDisabled,
     // Zed renders selected status-bar icon buttons with Color::Selected,
-    // which resolves to text.accent. Keep it distinct from the status-bar
-    // background so active panel icons remain visible.
-    "text.accent": p.white,
+    // which resolves to text.accent. Zed has no statusBarItem.activeBackground
+    // equivalent, so use the theme's highlight color to distinguish the
+    // selected icon from the default light-gray icons.
+    "text.accent": p.yellow,
     icon: p.blueTagSoft,
     "icon.muted": p.foregroundMuted,
     "icon.placeholder": p.foregroundSubtle,

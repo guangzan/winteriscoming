@@ -16,6 +16,10 @@ VS Code leaves `editorBracketHighlight.foreground*` unset in this theme, so it
 uses VS Code's native bracket-pair colorization defaults. Zed maps the same
 gold, orchid, and blue accents for bracket colorization.
 
+Zed does not expose VS Code's `statusBarItem.activeBackground` theme key, so
+selected status-bar icons use the theme's highlight color instead of a
+background block.
+
 If the extension is not in the marketplace yet, clone this repository and use
 **zed: install dev extension** from the command palette.
 
